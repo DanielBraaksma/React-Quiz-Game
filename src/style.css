@@ -49,3 +49,41 @@ body {
 .start-btn:active {
     box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
+
+main {
+    width: 80%;
+    max-width: 900px;
+    /* border: 1px solid red; */
+}
+
+/*******Question component*********/
+
+.question-container {
+    width: 100%;
+    color: #293264;
+    padding: 1em;
+    border: 1px solid red;
+}
+
+.question--title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: .5em;
+}
+
+.question-options {
+    display: flex;
+}
+
+.option {
+    text-align: center;
+    border: 1px solid #293264;
+    border-radius: 10px;
+    min-width: 100px;
+    padding: .35em;
+    margin-right: .5em;
+}
+
+hr {
+    margin: 1em 0;
+}

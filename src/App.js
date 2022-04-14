@@ -1,4 +1,5 @@
 import React from "react"
+import Question from "./components/Question"
 
 export default function App() {
     const [gameStatus, setGameStatus] = React.useState("welcome")
@@ -18,16 +19,18 @@ export default function App() {
                 </div>
             }
             {gameStatus === "in-progress" &&
-                <div className="quiz-container">
-                    <p>quiz has started</p>
-                </div>
+                <Question />
+                
             }
-            {gameStatus === "scored" &&
-                <div className="quiz-container">
-                    <p>quiz has started</p>
-                </div>
-            }
+
 
         </main>
     )
 }
+
+
+// {gameStatus === "scored" &&
+//                 <div className="quiz-container">
+//                     <p>quiz has started</p>
+//                 </div>
+//             }
