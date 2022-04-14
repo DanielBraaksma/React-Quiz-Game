@@ -5,4 +5,47 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
+    background: #F5F7FB;
+}
+
+#root{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+/*******Welcome Screen *********/
+
+.welcome {
+    text-align: center;
+    color: #293264;
+
+}
+
+.title {
+    font-size: 2.5rem;
+}
+
+.start-btn {
+    width: 193px;
+    height: 52px;
+    left: 179px;
+    background: #4D5B9E;
+    border-radius: 15px;
+    border: none;
+    color: #F5F7FB;
+    font-size: 1.5rem;
+    margin-top: 1.25em;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+.start-btn:focus {
+    outline: none;
+}
+
+.start-btn:active {
+    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
