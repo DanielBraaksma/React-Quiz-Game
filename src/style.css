@@ -12,8 +12,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
 }
 
 /*******Welcome Screen *********/
@@ -28,7 +33,8 @@ body {
     font-size: 2.5rem;
 }
 
-.start-btn {
+.start-btn,
+.score-btn {
     width: 193px;
     height: 52px;
     left: 179px;
@@ -86,4 +92,8 @@ main {
 
 hr {
     margin: 1em 0;
+}
+
+.score-btn {
+    margin: 2em auto;
 }
