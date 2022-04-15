@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    /* border: 1px solid red; */
 }
 
 body {
@@ -8,12 +9,17 @@ body {
     background: #F5F7FB;
 }
 
-#root{
+#root {
+    margin: 0;
+    padding: 0;
+}
+
+.main-container{
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    width: 100vw;
+    max-width: 100%;
 }
 
 main {
@@ -68,7 +74,7 @@ main {
     width: 100%;
     color: #293264;
     padding: 1em;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .question--title {

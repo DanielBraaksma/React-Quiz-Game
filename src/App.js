@@ -12,7 +12,7 @@ export default function App() {
         fetch("https://opentdb.com/api.php?amount=5")
             .then(res => res.json())
             .then(data => setQuestions(data.results))
-        console.log( "questions set")
+        console.log("questions set")
 
     }, [callApi])
 
@@ -31,27 +31,24 @@ export default function App() {
     }
 
     return (
-        <main>
+        <div className="main-container">
             {gameStatus === "welcome" &&
-                <div className="welcome">
-                    <h1 className="title">Quiz Me</h1>
-                    <h3 className="subtitle">Test your knowledge</h3>
-                    <button className="start-btn" onClick={startGame}>Start</button>
-                </div>
+                <main>
+                    <div className="welcome">
+                        <h1 className="title">Quiz Me</h1>
+                        <h3 className="subtitle">Test your knowledge</h3>
+                        <button className="start-btn" onClick={startGame}>Start</button>
+                    </div>
+                </main>
             }
             {gameStatus === "in-progress" &&
-                questionElements
+                <main>
+                    {questionElements}
+                    <button className="score-btn" onClick={() => console.log("clicked")}>Click me</button>
+                </main>
             }
-
-            {gameStatus === "in-progress" &&
-            <button className="score-btn" onClick={()=>console.log("clicked")}>Click me</button>}
-        </main>
+        </div>
     )
 }
 
 
-// {gameStatus === "scored" &&
-//                 <div className="quiz-container">
-//                     <p>quiz has started</p>
-//                 </div>
-//             }
