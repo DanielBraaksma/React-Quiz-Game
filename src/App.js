@@ -3,32 +3,34 @@ import Question from "./components/Question"
 import he from "he";
 
 export default function App() {
-    const [callApi, setCallApi] = React.useState(false)
-    const [gameStatus, setGameStatus] = React.useState("welcome")
+    const [callApi, setCallApi] = React.useState(false)  // track state to control API useEffect
+    const [gameStatus, setGameStatus] = React.useState("welcome") //for conditional rendering
     const [questions, setQuestions] = React.useState("")
     let questionElements;
 
-    React.useEffect(() => {
+    React.useEffect(() => { //handle API calls and reformats the data
         fetch("https://opentdb.com/api.php?amount=5")
             .then(res => res.json())
-            .then(data => setQuestions(data.results))
+            .then(data => {
+                let resArray = data.results;
+                setQuestions(resArray.map(q => {
+                    return {
+                        question: q.question,
+                        correct: q.correct_answer,
+                        options: [q.correct_answer, ...q.incorrect_answers],
+                        selected: false
+                    }
+                }))
+
+            })
         console.log("questions set")
 
     }, [callApi])
 
-    console.log(questions)
+   if (questions) {
+    questionElements = questions.map(ques=><Question value={ques} />)
+   }
 
-    function startGame() {
-        setGameStatus("in-progress")
-        console.log("game started")
-    }
-
-
-    if (questions) {
-        questionElements = questions.map(question => {
-            return <Question value={question} />
-        })
-    }
 
     return (
         <div className="main-container">
@@ -37,7 +39,7 @@ export default function App() {
                     <div className="welcome">
                         <h1 className="title">Quiz Me</h1>
                         <h3 className="subtitle">Test your knowledge</h3>
-                        <button className="start-btn" onClick={startGame}>Start</button>
+                        <button className="start-btn" onClick={() => setGameStatus("in-progress")}>Start</button>
                     </div>
                 </main>
             }
@@ -50,5 +52,3 @@ export default function App() {
         </div>
     )
 }
-
-
