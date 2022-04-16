@@ -4,35 +4,46 @@ import Options from "./Options"
 import he from "he";
 
 export default function Question(props) {
+    const {question, correct, options, selectedAnswer, select} = props.value
+    console.log(options)
+    // const styles = {
+    //     backgroundColor: "none"
+    // }
 
-console.log(props.value)
+    // options.forEach(opt=>{
+    //     if (opt === selectedAnswer){styles.backgroundColor = "lightblue"}
+    //     else {styles.backgroundColor = "none"}
+    // })
+
 
     //implicit return jsx
     // let options = (props.value.options).map(option=>(<p className="option" style={{backgroundColor: "blue"}}>{option}</p>))
 
-    let options = (props.value.options).map(option=>{
+    let optionsElements = (options).map(option=>{
+
         return(
-            <p className="option" style={{backgroundColor: "blue"}}>{option}</p>
+            <Options option={option} selectedAnswer={selectedAnswer} select={select}/>
         )
     })
 
-    function selectOption(){
-        console.log("selected")
-    }
+
 
     return (
         <div className="question-container">
-            <h4 className="question--title">{he.decode(props.value.question)}</h4>
+            <h4 className="question--title">{he.decode(question)}</h4>
             <div className="question-options">
-                {options}
+                {optionsElements}
             </div>
             <hr></hr>
         </div>
     )
 }
 
+// style={{styles}}
+// text: answer,
 
 // question: q.question,
-// correct: q.correct_answer,
-// options: [q.correct_answer, ...q.incorrect_answers],
-// selected: false
+//                         correct: q.correct_answer,
+//                         options: optionsArr,
+//                         selectedAnswer: "",
+//                         select: selectOption

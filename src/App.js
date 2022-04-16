@@ -1,36 +1,63 @@
 import React from "react"
 import Question from "./components/Question"
+import Data from "./data"
 import he from "he";
 
 export default function App() {
     const [callApi, setCallApi] = React.useState(false)  // track state to control API useEffect
     const [gameStatus, setGameStatus] = React.useState("welcome") //for conditional rendering
     const [questions, setQuestions] = React.useState("")
+    const [options, setOptions] = React.useState([])
     let questionElements;
 
-    React.useEffect(() => { //handle API calls and reformats the data
-        fetch("https://opentdb.com/api.php?amount=5")
-            .then(res => res.json())
-            .then(data => {
-                let resArray = data.results;
-                setQuestions(resArray.map(q => {
+    // console.log("render,", gameStatus, questions)
+
+    // React.useEffect(() => { //handle API calls and reformats the data
+    //     fetch("https://opentdb.com/api.php?amount=5")
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             let resArray = data.results;
+    //             // let optionsObjArr = [];
+
+    React.useEffect(()=>{
+    let resArray = Data.results;
+
+                setQuestions(resArray.map((q, i) => {
+                    let optionsArr = [q.correct_answer, ...q.incorrect_answers].sort();
+
+                    // for (let answer of optionsArr){
+                    //     optionsObjArr.push({
+                    //         text: answer,
+                    //         isSelected : false})
+                    // }
                     return {
                         question: q.question,
                         correct: q.correct_answer,
-                        options: [q.correct_answer, ...q.incorrect_answers],
-                        selected: false
+                        options: optionsArr,
+                        selectedAnswer: "",
+                        select: selectOption
                     }
                 }))
+    }, [])
 
-            })
-        console.log("questions set")
 
-    }, [callApi])
+
+   function selectOption (option){
+    console.log(option)
+       setQuestions (prevQuestions=>prevQuestions.map(q=>{
+           if(q.options.includes(option)){
+            return {...q, selectedAnswer: option}
+           } else {
+               return {...q}
+           }
+       }))
+   }
+
+//    console.log(questions)
 
    if (questions) {
     questionElements = questions.map(ques=><Question value={ques} />)
    }
-
 
     return (
         <div className="main-container">
