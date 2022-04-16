@@ -94,6 +94,7 @@ main {
     min-width: 100px;
     padding: .35em;
     margin-right: .5em;
+    cursor: pointer;
 }
 
 hr {

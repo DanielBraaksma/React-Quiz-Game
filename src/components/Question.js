@@ -5,28 +5,15 @@ import he from "he";
 
 export default function Question(props) {
     const {question, correct, options, selectedAnswer, select} = props.value
-    console.log(options)
-    // const styles = {
-    //     backgroundColor: "none"
-    // }
-
-    // options.forEach(opt=>{
-    //     if (opt === selectedAnswer){styles.backgroundColor = "lightblue"}
-    //     else {styles.backgroundColor = "none"}
-    // })
-
 
     //implicit return jsx
     // let options = (props.value.options).map(option=>(<p className="option" style={{backgroundColor: "blue"}}>{option}</p>))
 
     let optionsElements = (options).map(option=>{
-
         return(
             <Options option={option} selectedAnswer={selectedAnswer} select={select}/>
         )
     })
-
-
 
     return (
         <div className="question-container">

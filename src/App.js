@@ -8,6 +8,7 @@ export default function App() {
     const [gameStatus, setGameStatus] = React.useState("welcome") //for conditional rendering
     const [questions, setQuestions] = React.useState("")
     const [options, setOptions] = React.useState([])
+    const [score, setScore] = React.useState(0);
     let questionElements;
 
     // console.log("render,", gameStatus, questions)
@@ -45,12 +46,31 @@ export default function App() {
    function selectOption (option){
     console.log(option)
        setQuestions (prevQuestions=>prevQuestions.map(q=>{
+           if (q.selectedAnswer === option){return {...q, selectedAnswer: ""}} //if we already selected the same one deselect it.
            if(q.options.includes(option)){
             return {...q, selectedAnswer: option}
            } else {
                return {...q}
            }
        }))
+   }
+
+   function scoreQuiz () {
+        for (let q of questions){
+            if (!q.selectedAnswer){
+             return alert("Please make a selection for each question")
+            }
+        }
+        console.log("all selections  have been made")
+
+        let score = 0;
+        for (let q of questions){
+            if (q.selectedAnswer === q.correct){
+                score++;
+             console.log("you chose correct")
+            } else {console.log("wrong choice")}
+        }
+        console.log(score)
    }
 
 //    console.log(questions)
@@ -73,7 +93,7 @@ export default function App() {
             {gameStatus === "in-progress" &&
                 <main>
                     {questionElements}
-                    <button className="score-btn" onClick={() => console.log("clicked")}>Click me</button>
+                    <button className="score-btn" onClick={scoreQuiz}>Score Quiz</button>
                 </main>
             }
         </div>

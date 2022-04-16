@@ -1,7 +1,7 @@
 import he from "he";
 
 export default function Options (props){
-console.log(props.option === props.selectedAnswer)
+// console.log(props.option === props.selectedAnswer)
     const styles = {
         backgroundColor: "none"
     }
