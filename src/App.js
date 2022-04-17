@@ -70,7 +70,8 @@ export default function App() {
              console.log("you chose correct")
             } else {console.log("wrong choice")}
         }
-        console.log(score)
+        setGameStatus("scored")
+        setScore(score);
    }
 
 //    console.log(questions)
@@ -94,6 +95,15 @@ export default function App() {
                 <main>
                     {questionElements}
                     <button className="score-btn" onClick={scoreQuiz}>Score Quiz</button>
+                </main>
+            }
+            {gameStatus === "scored" &&
+                <main>
+                    {questionElements}
+                    <div className="footer-container">
+                        <p className="score">You scored {score}/{questions.length} correct answers</p>
+                        <button className="score-btn" onClick={()=>{setGameStatus("welcome")}}>Play Again</button>
+                    </div>
                 </main>
             }
         </div>

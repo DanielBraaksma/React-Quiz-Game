@@ -104,3 +104,14 @@ hr {
 .score-btn {
     margin: 2em auto;
 }
+
+.footer-container {
+    display: flex;
+    align-items: center;
+}
+
+.score {
+    font-size: 1.5rem;
+    color: #293264;
+    font-weight: bold;
+}
