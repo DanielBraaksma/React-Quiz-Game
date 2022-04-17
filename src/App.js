@@ -39,12 +39,13 @@ export default function App() {
                         select: selectOption
                     }
                 }))
-    }, [])
+    }, [callApi])
 
-
+console.log(gameStatus)
 
    function selectOption (option){
-    console.log(option)
+       console.log(gameStatus)
+    if (gameStatus !== "scored"){
        setQuestions (prevQuestions=>prevQuestions.map(q=>{
            if (q.selectedAnswer === option){return {...q, selectedAnswer: ""}} //if we already selected the same one deselect it.
            if(q.options.includes(option)){
@@ -53,9 +54,11 @@ export default function App() {
                return {...q}
            }
        }))
+    }
    }
 
    function scoreQuiz () {
+    setGameStatus("scored")
         for (let q of questions){
             if (!q.selectedAnswer){
              return alert("Please make a selection for each question")
@@ -70,14 +73,14 @@ export default function App() {
              console.log("you chose correct")
             } else {console.log("wrong choice")}
         }
-        setGameStatus("scored")
+
         setScore(score);
    }
 
 //    console.log(questions)
 
    if (questions) {
-    questionElements = questions.map(ques=><Question value={ques} />)
+    questionElements = questions.map(ques=><Question value={ques} gameStatus={gameStatus}/>)
    }
 
     return (
@@ -87,7 +90,7 @@ export default function App() {
                     <div className="welcome">
                         <h1 className="title">Quiz Me</h1>
                         <h3 className="subtitle">Test your knowledge</h3>
-                        <button className="start-btn" onClick={() => setGameStatus("in-progress")}>Start</button>
+                        <button className="start-btn" onClick={()=>setGameStatus("in-progress")}>Start</button>
                     </div>
                 </main>
             }
@@ -102,7 +105,7 @@ export default function App() {
                     {questionElements}
                     <div className="footer-container">
                         <p className="score">You scored {score}/{questions.length} correct answers</p>
-                        <button className="score-btn" onClick={()=>{setGameStatus("welcome")}}>Play Again</button>
+                        <button className="score-btn" onClick={()=>{setGameStatus("welcome");setCallApi(prevApi=>!prevApi)}}>Play Again</button>
                     </div>
                 </main>
             }

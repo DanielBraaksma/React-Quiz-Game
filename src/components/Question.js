@@ -11,7 +11,7 @@ export default function Question(props) {
 
     let optionsElements = (options).map(option=>{
         return(
-            <Options option={option} selectedAnswer={selectedAnswer} select={select}/>
+            <Options option={option} selectedAnswer={selectedAnswer} correct={correct} select={select} gameStatus={props.gameStatus}/>
         )
     })
 
