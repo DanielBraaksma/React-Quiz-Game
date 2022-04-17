@@ -94,6 +94,7 @@ main {
     min-width: 100px;
     padding: .35em;
     margin-right: .5em;
+    cursor: pointer;
 }
 
 hr {
@@ -102,4 +103,16 @@ hr {
 
 .score-btn {
     margin: 2em auto;
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+}
+
+.score {
+    font-size: 1.5rem;
+    color: #293264;
+    font-weight: bold;
+    margin-left: .5em;
 }
