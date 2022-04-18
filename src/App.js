@@ -9,32 +9,43 @@ export default function App() {
     const [questions, setQuestions] = React.useState("")
     const [score, setScore] = React.useState(0);
     let questionElements;
-    // console.log(callApi, gameStatus, questions, score)
 
-    // console.log("render,", gameStatus, questions)
 
-    // React.useEffect(() => { //handle API calls and reformats the data
-    //     fetch("https://opentdb.com/api.php?amount=5")
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             let resArray = data.results;
-    //             // let optionsObjArr = [];
+    React.useEffect(() => { //handle API calls and reformats the data
+        fetch("https://opentdb.com/api.php?amount=5")
+            .then(res => res.json())
+            .then(data => {
+                let resArray = data.results;
 
-    React.useEffect(()=>{
-    let resArray = Data.results;
-
-                setQuestions(resArray.map((q, i) => {
+                setQuestions (resArray.map((q,i)=>{
                     let optionsArr = [q.correct_answer, ...q.incorrect_answers].sort();
-
-                    return {
-                        question: q.question,
-                        correct: q.correct_answer,
-                        options: optionsArr,
-                        selectedAnswer: "",
-                        select: selectOption
-                    }
+                        return {
+                            question: q.question,
+                            correct: q.correct_answer,
+                            options: optionsArr,
+                            selectedAnswer: "",
+                            select: selectOption
+                        }
                 }))
+            })
     }, [callApi])
+
+
+    // React.useEffect(()=>{
+    //     let resArray = Data.results;
+
+    //                 setQuestions(resArray.map((q, i) => {
+    //                     let optionsArr = [q.correct_answer, ...q.incorrect_answers].sort();
+
+    //                     return {
+    //                         question: q.question,
+    //                         correct: q.correct_answer,
+    //                         options: optionsArr,
+    //                         selectedAnswer: "",
+    //                         select: selectOption
+    //                     }
+    //                 }))
+    //     }, [callApi])
 
     // figured out, needed to pass gamestatus state up from grandchild component.
    function selectOption (option, gameStatus){
