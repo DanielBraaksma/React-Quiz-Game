@@ -1,10 +1,6 @@
 import React from "react"
 import Question from "./components/Question"
-import Data from "./data"
-
-
-//2 BUGS, true and false not working and now it is marking without checking
-
+import Data from "./data" //used for testing purposes
 
 export default function App() {
     const [callApi, setCallApi] = React.useState(false)  // track state to control API useEffect
@@ -33,31 +29,14 @@ export default function App() {
             })
     }, [callApi])
 
-
-    // React.useEffect(()=>{
-    //     let resArray = Data.results;
-
-    //                 setQuestions(resArray.map((q, i) => {
-    //                     let optionsArr = [q.correct_answer, ...q.incorrect_answers].sort();
-
-    //                     return {
-    //                         question: q.question,
-    //                         correct: q.correct_answer,
-    //                         options: optionsArr,
-    //                         selectedAnswer: "",
-    //                         select: selectOption
-    //                     }
-    //                 }))
-    //     }, [callApi])
-
     // figured out, needed to pass gamestatus state up from grandchild component.
 
    function selectOption (option, gameStatus, question){
-    console.log(option)
+    // logic for selecting each element
  if (gameStatus === "in-progress"){
     setQuestions (prevQuestions=>prevQuestions.map(q=>{
         if (q.question === question && q.selectedAnswer === option){return {...q, selectedAnswer: ""}} //&&q.selectedAnser
-        if(q.question === question){ // this is causing the issue, need to use nonoid??
+        if(q.question === question){
          return {...q, selectedAnswer: option}
         } else {
             return {...q}
@@ -66,14 +45,14 @@ export default function App() {
  }
 }
    function scoreQuiz () {
-    // setGameStatus("scored")
+    // make sure all selections made
         for (let q of questions){
             if (!q.selectedAnswer){
-            // setGameStatus("in-progress")
              return alert("Please make a selection for each question")
             }
         }
 
+        //if so then proceed to score
         setGameStatus("scored")
         let score = 0;
         for (let q of questions){
@@ -84,11 +63,8 @@ export default function App() {
         setScore(score);
    }
 
-
-
-
    if (questions) {
-    questionElements = questions.map(ques=><Question value={ques} gameStatus={gameStatus}/>)
+    questionElements = questions.map(ques=><Question key={ques.question} value={ques} gameStatus={gameStatus}/>)
    }
 
     return (

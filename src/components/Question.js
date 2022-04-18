@@ -2,6 +2,7 @@ import Options from "./Options"
 import he from "he";
 
 export default function Question(props) {
+    //destructure props:
     const {question, correct, options, selectedAnswer, select} = props.value
 
     //implicit return jsx
@@ -9,7 +10,14 @@ export default function Question(props) {
 
     let optionsElements = (options).map(option=>{
         return(
-            <Options question={question} option={option} selectedAnswer={selectedAnswer} correct={correct} select={select} gameStatus={props.gameStatus}/>
+            <Options
+                key={`${question}:${option}`} //each individual option needs a unique key
+                question={question}
+                option={option}
+                selectedAnswer={selectedAnswer}
+                correct={correct}
+                select={select}
+                gameStatus={props.gameStatus}/>
         )
     })
 
