@@ -1,15 +1,15 @@
 import React from "react"
 import Question from "./components/Question"
 import Data from "./data"
-import he from "he";
+
 
 export default function App() {
     const [callApi, setCallApi] = React.useState(false)  // track state to control API useEffect
     const [gameStatus, setGameStatus] = React.useState("welcome") //for conditional rendering
     const [questions, setQuestions] = React.useState("")
-    const [options, setOptions] = React.useState([])
     const [score, setScore] = React.useState(0);
     let questionElements;
+    // console.log(callApi, gameStatus, questions, score)
 
     // console.log("render,", gameStatus, questions)
 
@@ -26,11 +26,6 @@ export default function App() {
                 setQuestions(resArray.map((q, i) => {
                     let optionsArr = [q.correct_answer, ...q.incorrect_answers].sort();
 
-                    // for (let answer of optionsArr){
-                    //     optionsObjArr.push({
-                    //         text: answer,
-                    //         isSelected : false})
-                    // }
                     return {
                         question: q.question,
                         correct: q.correct_answer,
@@ -41,11 +36,9 @@ export default function App() {
                 }))
     }, [callApi])
 
-console.log(gameStatus)
-
-   function selectOption (option){
-       console.log(gameStatus)
-    if (gameStatus !== "scored"){
+    // figured out, needed to pass gamestatus state up from grandchild component.
+   function selectOption (option, gameStatus){
+    if (gameStatus === "in-progress"){
        setQuestions (prevQuestions=>prevQuestions.map(q=>{
            if (q.selectedAnswer === option){return {...q, selectedAnswer: ""}} //if we already selected the same one deselect it.
            if(q.options.includes(option)){
@@ -64,20 +57,18 @@ console.log(gameStatus)
              return alert("Please make a selection for each question")
             }
         }
-        console.log("all selections  have been made")
 
         let score = 0;
         for (let q of questions){
             if (q.selectedAnswer === q.correct){
                 score++;
-             console.log("you chose correct")
-            } else {console.log("wrong choice")}
+            }
         }
-
         setScore(score);
    }
 
-//    console.log(questions)
+
+
 
    if (questions) {
     questionElements = questions.map(ques=><Question value={ques} gameStatus={gameStatus}/>)

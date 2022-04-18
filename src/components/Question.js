@@ -1,5 +1,3 @@
-// import React from "react"
-// import Logo from "../images/logo.png"
 import Options from "./Options"
 import he from "he";
 
@@ -25,12 +23,3 @@ export default function Question(props) {
         </div>
     )
 }
-
-// style={{styles}}
-// text: answer,
-
-// question: q.question,
-//                         correct: q.correct_answer,
-//                         options: optionsArr,
-//                         selectedAnswer: "",
-//                         select: selectOption

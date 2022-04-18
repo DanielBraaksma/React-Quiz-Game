@@ -1,7 +1,7 @@
 import he from "he";
 
 export default function Options (props){
-    console.log(props.gameStatus)
+    // console.log(props.gameStatus)
 
     const styles = {
         backgroundColor: "none"
@@ -34,7 +34,7 @@ export default function Options (props){
 
 
     return (
-        <p className="option" style={styles} onClick={()=>props.select(props.option)}>{he.decode(props.option)}</p>
+        <p className="option" style={styles} onClick={()=>props.select(props.option, props.gameStatus)}>{he.decode(props.option)}</p>
     )
 
 }
