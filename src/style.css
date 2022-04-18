@@ -95,6 +95,7 @@ main {
     padding: .35em;
     margin-right: .5em;
     cursor: pointer;
+    font-weight: bold;
 }
 
 hr {

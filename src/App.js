@@ -11,7 +11,7 @@ export default function App() {
 
 
     React.useEffect(() => { //handle API calls and reformats the data
-        fetch("https://opentdb.com/api.php?amount=5&type=boolean")
+        fetch("https://opentdb.com/api.php?amount=5")
             .then(res => res.json())
             .then(data => {
                 let resArray = data.results;
