@@ -3,6 +3,9 @@ import Question from "./components/Question"
 import Data from "./data"
 
 
+//2 BUGS, true and false not working and now it is marking without checking
+
+
 export default function App() {
     const [callApi, setCallApi] = React.useState(false)  // track state to control API useEffect
     const [gameStatus, setGameStatus] = React.useState("welcome") //for conditional rendering
@@ -12,7 +15,7 @@ export default function App() {
 
 
     React.useEffect(() => { //handle API calls and reformats the data
-        fetch("https://opentdb.com/api.php?amount=5")
+        fetch("https://opentdb.com/api.php?amount=5&type=boolean")
             .then(res => res.json())
             .then(data => {
                 let resArray = data.results;
@@ -48,27 +51,30 @@ export default function App() {
     //     }, [callApi])
 
     // figured out, needed to pass gamestatus state up from grandchild component.
-   function selectOption (option, gameStatus){
-    if (gameStatus === "in-progress"){
-       setQuestions (prevQuestions=>prevQuestions.map(q=>{
-           if (q.selectedAnswer === option){return {...q, selectedAnswer: ""}} //if we already selected the same one deselect it.
-           if(q.options.includes(option)){
-            return {...q, selectedAnswer: option}
-           } else {
-               return {...q}
-           }
-       }))
-    }
-   }
 
+   function selectOption (option, gameStatus, question){
+    console.log(option)
+ if (gameStatus === "in-progress"){
+    setQuestions (prevQuestions=>prevQuestions.map(q=>{
+        if (q.question === question && q.selectedAnswer === option){return {...q, selectedAnswer: ""}} //&&q.selectedAnser
+        if(q.question === question){ // this is causing the issue, need to use nonoid??
+         return {...q, selectedAnswer: option}
+        } else {
+            return {...q}
+        }
+    }))
+ }
+}
    function scoreQuiz () {
-    setGameStatus("scored")
+    // setGameStatus("scored")
         for (let q of questions){
             if (!q.selectedAnswer){
+            // setGameStatus("in-progress")
              return alert("Please make a selection for each question")
             }
         }
 
+        setGameStatus("scored")
         let score = 0;
         for (let q of questions){
             if (q.selectedAnswer === q.correct){

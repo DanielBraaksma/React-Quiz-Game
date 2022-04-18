@@ -34,7 +34,7 @@ export default function Options (props){
 
 
     return (
-        <p className="option" style={styles} onClick={()=>props.select(props.option, props.gameStatus)}>{he.decode(props.option)}</p>
+        <p className="option" style={styles} onClick={()=>props.select(props.option, props.gameStatus, props.question)}>{he.decode(props.option)}</p>
     )
 
 }
