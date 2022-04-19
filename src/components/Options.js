@@ -1,18 +1,17 @@
 import he from "he";
 
 export default function Options(props) {
-    // console.log(props.gameStatus)
-
     const styles = {
         backgroundColor: "none"
     }
 
+    //how the options will be rendered initially
     if (props.gameStatus === "in-progress") {
         if (props.option === props.selectedAnswer) { styles.backgroundColor = "lightblue" }
         else { styles.backgroundColor = "transparent" }
     }
 
-
+    //show correct/wrong answeres upon scoring
     if (props.gameStatus === "scored") {
         if (props.option === props.correct) {
             styles.backgroundColor = "lightgreen";
@@ -31,20 +30,13 @@ export default function Options(props) {
 
     }
 
-    // if (props.gameStatus=== "scored"){
-    //     if (props.option === props.correct){
-    //         styles.backgroundColor = "green"
-    //     } if (props.selectedAnswer !== props.correct) {
-    //         styles.backgroundColor ="red"
-    //     }else {
-    //     styles.backgroundColor = "transparent"
-    //     }
-    // }
-
-
-
     return (
-        <p className="option" style={styles} onClick={() => props.select(props.option, props.gameStatus, props.question)}>{he.decode(props.option)}</p>
+        <p className="option"
+            style={styles}
+            //use the unique question to select the correct option:
+            onClick={() => props.select(props.option, props.gameStatus, props.question)}
+            >{he.decode(props.option)}
+        </p>
     )
 
 }
