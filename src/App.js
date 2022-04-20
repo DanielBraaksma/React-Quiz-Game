@@ -1,6 +1,8 @@
 import React from "react"
 import Question from "./components/Question"
 import Data from "./data" //used for testing purposes
+import yellowblob from "./images/yellowblob.png"
+import blueblob from "./images/blueblob.png"
 
 export default function App() {
     const [callApi, setCallApi] = React.useState(false)  // track state to control API useEffect
@@ -69,8 +71,8 @@ export default function App() {
 
     return (
         <div className="main-container">
-            <img src="./images/yellowblob.png" className="yellowblob"/>
-            <img src="./images/blueblob.png" className="blueblob"/>
+            <img src={yellowblob} className="yellowblob"/>
+            <img src={blueblob} className="blueblob"/>
             {gameStatus === "welcome" &&
                 <main>
                     <div className="welcome">
